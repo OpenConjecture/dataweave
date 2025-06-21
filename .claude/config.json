@@ -1,0 +1,15 @@
+{
+  "version": "1.0.72",
+  "project": {
+    "name": "dataweave",
+    "type": "claude-flow",
+    "created": "2025-06-21T05:55:48.421Z"
+  },
+  "features": {
+    "swarm": true,
+    "sparc": true,
+    "memory": true,
+    "terminal": true,
+    "mcp": true
+  }
+}
