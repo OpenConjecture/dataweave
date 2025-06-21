@@ -1,0 +1,37 @@
+# Source files (only ship compiled)
+src/
+*.ts
+!*.d.ts
+
+# Config files
+tsconfig.json
+.gitignore
+.npmignore
+
+# Development
+.vscode/
+.idea/
+*.log
+.env*
+
+# Documentation
+SETUP.md
+docs/
+
+# Testing
+coverage/
+*.test.js
+*.test.d.ts
+__tests__/
+
+# Git
+.git/
+.github/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+temp/
