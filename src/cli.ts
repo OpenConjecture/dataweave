@@ -26,7 +26,7 @@ program
   .description('Initialize a new dataweave project')
   .option('-n, --name <name>', 'Project name')
   .option('-t, --template <template>', 'Project template', 'default')
-  .action(async (options) => {
+  .action(async (_options) => {
     console.log(logo);
     const spinner = ora('Initializing dataweave project...').start();
     
