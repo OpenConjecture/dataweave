@@ -14,7 +14,8 @@ const scaffolding_1 = require("./scaffolding");
 const dbt_1 = require("./dbt");
 const dagster_1 = require("./dagster");
 const ai_1 = require("./ai");
-const version = '0.0.1';
+const packageJson = require('../package.json');
+const version = packageJson.version;
 const program = new commander_1.Command();
 async function loadDataweaveConfig() {
     const configPath = (0, path_1.join)(process.cwd(), '.dataweave', 'config.json');

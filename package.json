@@ -1,72 +1,72 @@
 {
     "name": "dataweave",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "AI-assisted CLI for modern data pipelines with DBT, Dagster, and Supabase integration",
     "keywords": [
-      "cli",
-      "data",
-      "pipeline",
-      "orchestration",
-      "dbt",
-      "dagster",
-      "supabase",
-      "ai",
-      "data-engineering",
-      "etl",
-      "elt",
-      "dataops"
+        "cli",
+        "data",
+        "pipeline",
+        "orchestration",
+        "dbt",
+        "dagster",
+        "supabase",
+        "ai",
+        "data-engineering",
+        "etl",
+        "elt",
+        "dataops"
     ],
     "homepage": "https://github.com/openconjecture/dataweave#readme",
     "bugs": {
-      "url": "https://github.com/openconjecture/dataweave/issues"
+        "url": "https://github.com/openconjecture/dataweave/issues"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/openconjecture/dataweave.git"
+        "type": "git",
+        "url": "git+https://github.com/openconjecture/dataweave.git"
     },
     "license": "MIT",
     "author": "Garrett Eastham <garrett@openconjecture.com>",
     "main": "dist/index.js",
     "bin": {
-      "dataweave": "./dist/cli.js",
-      "dw": "./dist/cli.js"
+        "dataweave": "./dist/cli.js",
+        "dw": "./dist/cli.js"
     },
     "files": [
-      "dist",
-      "README.md",
-      "LICENSE"
+        "dist",
+        "README.md",
+        "LICENSE"
     ],
     "scripts": {
-      "build": "tsc",
-      "dev": "tsx src/cli.ts",
-      "prepublishOnly": "npm run build",
-      "test": "vitest run",
-      "test:watch": "vitest",
-      "test:coverage": "vitest run --coverage",
-      "test:unit": "vitest run tests/*.test.ts",
-      "test:integration": "vitest run tests/*.integration.test.ts",
-      "lint": "npx eslint src tests --ext .ts",
-      "typecheck": "tsc --noEmit"
+        "build": "tsc",
+        "dev": "tsx src/cli.ts",
+        "prepublishOnly": "npm run build",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage",
+        "test:unit": "vitest run tests/*.test.ts",
+        "test:integration": "vitest run tests/*.integration.test.ts",
+        "lint": "npx eslint src tests --ext .ts",
+        "typecheck": "tsc --noEmit"
     },
     "dependencies": {
-      "chalk": "^5.3.0",
-      "commander": "^11.1.0",
-      "ora": "^8.0.1"
+        "chalk": "^4.1.2",
+        "commander": "^11.1.0",
+        "ora": "^5.4.1"
     },
     "devDependencies": {
-      "@types/node": "^20.10.0",
-      "@typescript-eslint/eslint-plugin": "^6.0.0",
-      "@typescript-eslint/parser": "^6.0.0",
-      "@vitest/coverage-v8": "^1.0.0",
-      "eslint": "^8.45.0",
-      "tsx": "^4.6.0",
-      "typescript": "^5.3.0",
-      "vitest": "^1.0.0"
+        "@types/node": "^20.10.0",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "@vitest/coverage-v8": "^1.0.0",
+        "eslint": "^8.45.0",
+        "tsx": "^4.6.0",
+        "typescript": "^5.3.0",
+        "vitest": "^1.0.0"
     },
     "engines": {
-      "node": ">=16.0.0"
+        "node": ">=16.0.0"
     },
     "publishConfig": {
-      "access": "public"
+        "access": "public"
     }
-  }
+}

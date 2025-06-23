@@ -255,7 +255,7 @@ describe('CLI Integration Tests', () => {
     it('should display version information', () => {
       const output = runCLI(['--version']);
       
-      expect(output).toContain('0.0.1');
+      expect(output).toContain('1.0.0');
     });
 
     it('should display info command', () => {

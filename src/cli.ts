@@ -11,7 +11,9 @@ import { DbtManager } from './dbt';
 import { DagsterManager } from './dagster';
 import { AIEngine } from './ai';
 
-const version = '0.0.1'; // Keep in sync with package.json
+// Import package.json to get version
+const packageJson = require('../package.json');
+const version = packageJson.version;
 
 const program = new Command();
 
