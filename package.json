@@ -1,6 +1,6 @@
 {
     "name": "dataweave",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "AI-assisted CLI for modern data pipelines with DBT, Dagster, and Supabase integration",
     "keywords": [
       "cli",
@@ -16,16 +16,16 @@
       "elt",
       "dataops"
     ],
-    "homepage": "https://github.com/yourusername/dataweave#readme",
+    "homepage": "https://github.com/openconjecture/dataweave#readme",
     "bugs": {
-      "url": "https://github.com/yourusername/dataweave/issues"
+      "url": "https://github.com/openconjecture/dataweave/issues"
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/yourusername/dataweave.git"
+      "url": "git+https://github.com/openconjecture/dataweave.git"
     },
     "license": "MIT",
-    "author": "Your Name <your.email@example.com>",
+    "author": "Garrett Eastham <garrett@openconjecture.com>",
     "main": "dist/index.js",
     "bin": {
       "dataweave": "./dist/cli.js",
