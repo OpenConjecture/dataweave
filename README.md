@@ -223,7 +223,7 @@ npm run test:coverage
 - **[Getting Started Guide](docs/getting-started.md)** - Comprehensive setup and usage
 - **[API Reference](docs/api-reference.md)** - Complete command documentation
 - **[Testing Guide](TESTING.md)** - Testing strategies and examples
-- **[Contributing](docs/contributing.md)** - Development guidelines
+- **[Contributing Guide](docs/contributing.md)** - Development guidelines
 
 ## 🌟 Examples
 
