@@ -77,14 +77,14 @@ run_test "TypeScript compilation" "npm run build"
 run_test "Type checking" "npm run typecheck"
 
 # Run linting (if ESLint is configured)
-if command -v npx eslint &> /dev/null; then
+if npm list eslint &> /dev/null; then
     run_test "ESLint linting" "npm run lint"
 else
     print_warning "ESLint not available, skipping linting"
 fi
 
 # Run unit tests
-if command -v npx vitest &> /dev/null; then
+if npm list vitest &> /dev/null; then
     run_test "Unit tests" "npm run test:unit"
     run_test "Integration tests" "npm run test:integration"
     
@@ -105,19 +105,20 @@ else
     
     # Test project initialization
     TEMP_DIR=$(mktemp -d)
+    ORIGINAL_DIR=$(pwd)
     cd "$TEMP_DIR"
     
-    run_test "Project initialization" "node $(pwd)/dataweave/dist/cli.js init test-project"
+    run_test "Project initialization" "node $ORIGINAL_DIR/dist/cli.js init test-project"
     
     # Test model generation
     cd test-project
-    run_test "DBT model generation" "node $(pwd)/dataweave/dist/cli.js dbt:model:new test_model"
+    run_test "DBT model generation" "node $ORIGINAL_DIR/dist/cli.js dbt:model:new test_model"
     
     # Test asset generation
-    run_test "Dagster asset generation" "node $(pwd)/dataweave/dist/cli.js dagster:asset:new test_asset"
+    run_test "Dagster asset generation" "node $ORIGINAL_DIR/dist/cli.js dagster:asset:new test_asset"
     
     # Cleanup
-    cd -
+    cd "$ORIGINAL_DIR"
     rm -rf "$TEMP_DIR"
 fi
 
@@ -126,21 +127,22 @@ print_status "Testing CLI installation..."
 
 # Create test directory
 TEST_DIR=$(mktemp -d)
+ORIGINAL_DIR=$(pwd)
 cd "$TEST_DIR"
 
 # Test init command
-run_test "CLI init command" "npx tsx $(pwd)/dataweave/src/cli.ts init cli-test-project"
+run_test "CLI init command" "npx tsx $ORIGINAL_DIR/src/cli.ts init cli-test-project"
 
 cd cli-test-project
 
 # Test DBT commands
-run_test "DBT model creation" "npx tsx $(pwd)/dataweave/src/cli.ts dbt:model:new integration_test_model --description 'Integration test model'"
+run_test "DBT model creation" "npx tsx $ORIGINAL_DIR/src/cli.ts dbt:model:new integration_test_model --description 'Integration test model'"
 
 # Test Dagster commands  
-run_test "Dagster asset creation" "npx tsx $(pwd)/dataweave/src/cli.ts dagster:asset:new integration_test_asset --description 'Integration test asset'"
+run_test "Dagster asset creation" "npx tsx $ORIGINAL_DIR/src/cli.ts dagster:asset:new integration_test_asset --description 'Integration test asset'"
 
 # Test AI commands (mock)
-run_test "AI DBT generation" "npx tsx $(pwd)/dataweave/src/cli.ts ai:generate:dbt 'Create a simple user model'"
+run_test "AI DBT generation" "npx tsx $ORIGINAL_DIR/src/cli.ts ai:generate:dbt 'Create a simple user model'"
 
 # Test file structure
 print_status "Verifying generated file structure..."
@@ -163,7 +165,7 @@ check_file "data/dagster/definitions.py"
 check_file "data/dagster/assets/integration_test_asset.py"
 
 # Cleanup test directory
-cd -
+cd "$ORIGINAL_DIR"
 rm -rf "$TEST_DIR"
 
 # Performance test
@@ -174,7 +176,7 @@ cd "$PERF_TEST_DIR"
 
 # Time the init command
 start_time=$(date +%s)
-npx tsx $(pwd)/dataweave/src/cli.ts init perf-test-project > /dev/null 2>&1
+npx tsx "$ORIGINAL_DIR/src/cli.ts" init perf-test-project > /dev/null 2>&1
 end_time=$(date +%s)
 init_duration=$((end_time - start_time))
 
@@ -185,7 +187,7 @@ else
 fi
 
 # Cleanup
-cd -
+cd "$ORIGINAL_DIR"
 rm -rf "$PERF_TEST_DIR"
 
 # Security check

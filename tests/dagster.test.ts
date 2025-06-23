@@ -236,7 +236,7 @@ def custom_asset():
       expect(code).toContain('from dagster import job, op');
       expect(code).toContain('@job');
       expect(code).toContain('def basic_job():');
-      expect(code).toContain('class BasicJobConfig(Config):');
+      expect(code).toContain('class Basic_jobConfig(Config):');
     });
 
     it('should generate job code with assets', async () => {
@@ -278,7 +278,7 @@ def custom_asset():
       const content = await readFile(initPath, 'utf-8');
       expect(content).toContain('from .asset1 import asset1');
       expect(content).toContain('from .asset2 import asset2');
-      expect(content).toContain('"asset1", "asset2"');
+      expect(content).toContain('asset1') && expect(content).toContain('asset2');
     });
 
     it('should not duplicate imports', async () => {

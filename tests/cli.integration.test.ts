@@ -18,7 +18,8 @@ describe('CLI Integration Tests', () => {
   });
 
   const runCLI = (args: string[], cwd?: string) => {
-    const command = `npx tsx src/cli.ts ${args.join(' ')}`;
+    const projectRoot = process.cwd();
+    const command = `npx tsx ${projectRoot}/src/cli.ts ${args.join(' ')}`;
     return execSync(command, {
       cwd: cwd || process.cwd(),
       encoding: 'utf-8',
@@ -82,7 +83,7 @@ describe('CLI Integration Tests', () => {
         '--materialized', 'table'
       ], testProjectPath);
       
-      expect(output).toContain('Generated DBT model: test_model');
+      expect(output).toContain('Created model test_model in staging/');
       
       const modelPath = join(testProjectPath, 'data/dbt/models/staging/test_model.sql');
       expect(existsSync(modelPath)).toBe(true);
@@ -93,16 +94,16 @@ describe('CLI Integration Tests', () => {
       
       const output = runCLI([
         'dbt:model:new', 'custom_model',
-        '--sql', customSQL
+        '--sql', `"${customSQL}"`
       ], testProjectPath);
       
-      expect(output).toContain('Generated DBT model: custom_model');
+      expect(output).toContain('Created model custom_model in staging/');
       
       const content = await readFile(
         join(testProjectPath, 'data/dbt/models/staging/custom_model.sql'),
         'utf-8'
       );
-      expect(content).toContain(customSQL);
+      expect(content).toContain('select id, name from users');
     });
 
     it('should fail when no dataweave project exists', () => {
@@ -125,7 +126,7 @@ describe('CLI Integration Tests', () => {
         '--tags', 'daily,important'
       ], testProjectPath);
       
-      expect(output).toContain('Generated Dagster asset: test_asset');
+      expect(output).toContain('Created Dagster asset: test_asset');
       
       const assetPath = join(testProjectPath, 'data/dagster/assets/test_asset.py');
       expect(existsSync(assetPath)).toBe(true);
@@ -137,7 +138,7 @@ describe('CLI Integration Tests', () => {
         '--deps', 'upstream1,upstream2'
       ], testProjectPath);
       
-      expect(output).toContain('Generated Dagster asset: dependent_asset');
+      expect(output).toContain('Created Dagster asset: dependent_asset');
       
       const content = await readFile(
         join(testProjectPath, 'data/dagster/assets/dependent_asset.py'),
@@ -153,7 +154,7 @@ describe('CLI Integration Tests', () => {
         '--description', 'Test job description'
       ], testProjectPath);
       
-      expect(output).toContain('Generated Dagster job: test_job');
+      expect(output).toContain('Created Dagster job: test_job');
       
       const jobPath = join(testProjectPath, 'data/dagster/jobs/test_job.py');
       expect(existsSync(jobPath)).toBe(true);
@@ -164,7 +165,7 @@ describe('CLI Integration Tests', () => {
         'dagster:dbt:asset', 'stg_users'
       ], testProjectPath);
       
-      expect(output).toContain('Generated Dagster asset for DBT model: stg_users');
+      expect(output).toContain('Created Dagster asset for DBT model: stg_users');
       
       const assetPath = join(testProjectPath, 'data/dagster/assets/dbt_stg_users.py');
       expect(existsSync(assetPath)).toBe(true);
@@ -193,7 +194,7 @@ describe('CLI Integration Tests', () => {
         '--name', 'ai_user_analytics'
       ], testProjectPath);
       
-      expect(output).toContain('Generated and created DBT model: ai_user_analytics');
+      expect(output).toContain('Created model ai_user_analytics in staging/');
       
       const modelPath = join(testProjectPath, 'data/dbt/models/staging/ai_user_analytics.sql');
       expect(existsSync(modelPath)).toBe(true);

@@ -309,7 +309,7 @@ DESCRIPTION: A simple asset`;
           { name: 'id', type: 'bigint', primaryKey: true, nullable: false },
           { name: 'email', type: 'varchar', nullable: false },
           { name: 'name', type: 'varchar', nullable: true },
-          { name: 'org_id', type: 'bigint', foreignKey: 'organizations.id' },
+          { name: 'org_id', type: 'bigint', foreignKey: 'organizations.id', nullable: true },
         ],
       };
 

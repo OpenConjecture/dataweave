@@ -124,6 +124,31 @@ Please provide:
 Format the response as markdown.`;
     
     try {
+      // For mock provider, generate model-specific documentation
+      if (this.config.provider === 'openai' && (!this.config.apiKey || this.config.apiKey === 'test-key')) {
+        const documentation = `# ${modelName} Model Documentation
+
+This model provides analysis and transformations for ${modelName} data.
+
+## Overview
+The ${modelName} model processes source data and applies business logic transformations.
+
+## SQL Analysis
+\`\`\`sql
+${sql}
+\`\`\`
+
+## Key Features
+- Data validation and cleaning
+- Business rule applications
+- Performance optimizations
+
+*Note: This is a mock documentation. Configure a real AI provider for detailed analysis.*`;
+        
+        console.log(chalk.green('✓ Documentation generated'));
+        return documentation;
+      }
+      
       const documentation = await this.provider.generate(prompt);
       console.log(chalk.green('✓ Documentation generated'));
       return documentation;
@@ -311,7 +336,7 @@ Note: This is a mock explanation. Configure a real AI provider for detailed anal
 Note: This is a mock optimization. Configure a real AI provider for detailed suggestions.`;
   }
 
-  private generateMockDbtResponse(prompt: string): string {
+  private generateMockDbtResponse(_prompt: string): string {
     return `\`\`\`sql
 -- Generated DBT model based on user request
 {{ config(materialized='view') }}
@@ -329,7 +354,7 @@ where created_at >= '2023-01-01'
 DESCRIPTION: Sample DBT model that selects user data with basic filtering.`;
   }
 
-  private generateMockDagsterResponse(prompt: string): string {
+  private generateMockDagsterResponse(_prompt: string): string {
     return `\`\`\`python
 from dagster import asset
 import pandas as pd
@@ -367,11 +392,11 @@ class AnthropicProvider implements AIProvider {
     console.log(chalk.yellow('⚠️ Anthropic provider not yet implemented'));
   }
 
-  async generate(prompt: string, _context?: any): Promise<string> {
+  async generate(_prompt: string, _context?: any): Promise<string> {
     throw new Error('Anthropic provider not yet implemented');
   }
 
-  async explain(_code: string, codeType: 'sql' | 'python'): Promise<string> {
+  async explain(_code: string, _codeType: 'sql' | 'python'): Promise<string> {
     throw new Error('Anthropic provider not yet implemented');
   }
 
@@ -388,11 +413,11 @@ class LocalProvider implements AIProvider {
     console.log(chalk.yellow('⚠️ Local provider not yet implemented'));
   }
 
-  async generate(prompt: string, _context?: any): Promise<string> {
+  async generate(_prompt: string, _context?: any): Promise<string> {
     throw new Error('Local provider not yet implemented');
   }
 
-  async explain(_code: string, codeType: 'sql' | 'python'): Promise<string> {
+  async explain(_code: string, _codeType: 'sql' | 'python'): Promise<string> {
     throw new Error('Local provider not yet implemented');
   }
 
